@@ -2,14 +2,9 @@ package com.chengxi.p2p.model.vo;
 
 import java.io.Serializable;
 import java.util.List;
-
 /**
- * ClassName:PaginatinoVO
- * Package:com.bjpowernode.p2p.model.vo
- * Description:
- *
- * @date:2018/9/18 12:10
- * @author:guoxin@bjpowernode.com
+ * @author CHENGXI
+ * @date 2019/8/3
  */
 public class PaginatinoVO<T> implements Serializable {
 

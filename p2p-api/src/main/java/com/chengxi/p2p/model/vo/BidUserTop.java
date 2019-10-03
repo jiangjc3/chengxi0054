@@ -1,14 +1,9 @@
 package com.chengxi.p2p.model.vo;
 
 import java.io.Serializable;
-
 /**
- * ClassName:BidUserTop
- * Package:com.bjpowernode.p2p.model.vo
- * Description:
- *
- * @date:2018/9/25 12:05
- * @author:guoxin@bjpowernode.com
+ * @author CHENGXI
+ * @date 2019/8/3
  */
 public class BidUserTop implements Serializable {
 
