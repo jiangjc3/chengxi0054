@@ -56,5 +56,49 @@
             a.bid_time desc
     </select>
 
+    <insert id="insertSelective" parameterType="com.chengxi.p2p.model.loan.BidInfo">
+        insert into b_bid_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="loanId != null">
+                loan_id,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="bidMoney != null">
+                bid_money,
+            </if>
+            <if test="bidTime != null">
+                bid_time,
+            </if>
+            <if test="bidStatus != null">
+                bid_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="loanId != null">
+                #{loanId,jdbcType=INTEGER},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=INTEGER},
+            </if>
+            <if test="bidMoney != null">
+                #{bidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="bidTime != null">
+                #{bidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bidStatus != null">
+                #{bidStatus,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
 
 </mapper>

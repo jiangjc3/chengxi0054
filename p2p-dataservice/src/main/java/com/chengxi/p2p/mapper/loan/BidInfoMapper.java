@@ -14,4 +14,6 @@ public interface BidInfoMapper {
     Double selectAllBidMoney();
 
     List<BidInfo> selectBidInfoListByLoanId(Integer id);
+
+    int insertSelective(BidInfo bidInfo);
 }

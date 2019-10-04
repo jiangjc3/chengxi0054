@@ -19,4 +19,8 @@ public interface LoanInfoMapper {
     LoanInfo selectByPrimaryKey(Integer id);
 
     Long selectTotal(Map<String, Object> paramMap);
+
+    int updateLeftProductMoneyByLoanId(Map<String, Object> paramMap);
+
+    int updateByPrimaryKeySelective(LoanInfo updateLoanInfo);
 }

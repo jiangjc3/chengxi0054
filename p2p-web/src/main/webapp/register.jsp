@@ -36,21 +36,21 @@
               
               <div class="login-box clearfix" style="z-index:100;">
                 <label>手机号</label>
-                <input type="text" id="phone" name="phone" class="input_text" maxlength="11" placeholder="请输入11位手机号码" autocomplete="off" onblur="userRegistered();"/>
+                <input type="text" id="phone" name="phone" class="input_text" maxlength="11" placeholder="请输入11位手机号码" autocomplete="off" onblur="checkPhone();"/>
                 <span id="phoneOk" class="ok" style="display:none;"></span>
                 <div id="phoneErr" class="form-hint" style="display:none;"></div>
               </div>
               
               <div class="login-box clearfix " style="z-index:90;">
                 <label>登录密码</label>
-                <input type="password" id="loginPassword" name="loginPassword" class="input_text" maxlength="20"  placeholder="请输入6-20位英文和数字混合密码" autocomplete="off" onblur="psCheck();"/>
+                <input type="password" id="loginPassword" name="loginPassword" class="input_text" maxlength="20"  placeholder="请输入6-20位英文和数字混合密码" autocomplete="off" onblur="checkLoginPassword();"/>
                 <span id="loginPasswordOk" class="ok" style="display:none;"></span>
                 <div id="loginPasswordErr" class="form-hint" style="display:none;z-index:90;"></div>
               </div>
               
               <div class="login-box clearfix" style="z-index:80;">
                 <label>确认密码</label>
-                <input type="password" id="replayLoginPassword" name="replayLoginPassword" class="input_text" maxlength="21" placeholder="请再次输入登录密码" onblur="pwdequ()"/>
+                <input type="password" id="replayLoginPassword" name="replayLoginPassword" class="input_text" maxlength="21" placeholder="请再次输入登录密码" onblur="checkLoginPasswordEqu()"/>
                 <span id="replayLoginPasswordOk" class="ok" style="display:none;"></span>
                 <div id="replayLoginPasswordErr" class="form-hint" style="display:none;"></div>
               </div>

@@ -24,6 +24,16 @@ public class User implements Serializable {
 
     private String headerImage;
 
+    private Double availableMoney;
+
+    public Double getAvailableMoney() {
+        return availableMoney;
+    }
+
+    public void setAvailableMoney(Double availableMoney) {
+        this.availableMoney = availableMoney;
+    }
+
     public Integer getId() {
         return id;
     }
