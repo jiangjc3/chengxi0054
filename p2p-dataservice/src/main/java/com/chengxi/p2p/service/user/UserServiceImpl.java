@@ -41,8 +41,9 @@ public class UserServiceImpl implements UserService {
         BoundValueOperations<Object, Object> boundValueOps = redisTemplate.boundValueOps(BizConstant.ALL_USER_COUNT);
 
         //获取指定key的value值
-        Long allUserCount = (Long) boundValueOps.get();
-
+//        Long allUserCount = (Long) boundValueOps.get();
+        Number number = (Number) boundValueOps.get();
+        Long allUserCount = number == null? null : number.longValue();
         //判断是否有值
         if (null == allUserCount) {
             //去数据库查询
