@@ -30,6 +30,11 @@ public class IndexController {
     @Reference
     private UserService userService;
 
+    @RequestMapping("/")
+    public String homePage(HttpServletRequest request, Model model) {
+        return "redirect:/index";
+    }
+
     @RequestMapping("index")
     public String index(HttpServletRequest request, Model model) {
         // 获取历史年化收益率
