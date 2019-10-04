@@ -7,7 +7,6 @@
     <modules>
         <module>p2p-common-util</module>
         <module>p2p-api</module>
-        <module>p2p-parent</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
