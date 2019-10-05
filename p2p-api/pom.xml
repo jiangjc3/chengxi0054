@@ -13,12 +13,12 @@
 
     <name>p2p-api</name>
     <description>商品模块</description>
-    <dependencies>
-        <!-- pagehelper分页插件依赖 -->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-        </dependency>
-    </dependencies>
+        <dependencies>
+            <!-- pagehelper分页插件依赖 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+            </dependency>
+        </dependencies>
 
 </project>

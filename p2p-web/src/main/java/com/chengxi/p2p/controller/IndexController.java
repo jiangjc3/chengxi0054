@@ -9,6 +9,7 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -76,6 +77,15 @@ public class IndexController {
 
 
         return "index";
+    }
+
+    @RequestMapping(value = "loan/logout")
+    public String logout(HttpServletRequest request) {
+        //让session失效或者清除session
+        request.getSession().invalidate();
+        ModelAndView mv = new ModelAndView("index");
+
+        return "redirect:/index";
     }
 
 }

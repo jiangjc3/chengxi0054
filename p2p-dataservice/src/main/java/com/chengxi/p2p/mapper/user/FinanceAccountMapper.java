@@ -16,4 +16,6 @@ public interface FinanceAccountMapper {
     int insertSelective(FinanceAccount financeAccount);
 
     int updateFinanceAccountByBid(Map<String, Object> paramMap);
+
+    int updateFinanceAccountByIncomeBack(Map<String, Object> paramMap);
 }

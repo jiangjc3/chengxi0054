@@ -26,4 +26,6 @@ public interface LoanInfoMapper {
     int updateByPrimaryKeySelective(LoanInfo updateLoanInfo);
 
     List<LoanInfo> selectLoanInfos(@Param(value="productType")Integer ptype);
+
+    List<LoanInfo> selectLoanInfoByProductStatus(int i);
 }

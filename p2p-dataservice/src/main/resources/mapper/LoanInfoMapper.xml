@@ -141,5 +141,14 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+    <!--根据产品状态获取产品列表-->
+    <select id="selectLoanInfoByProductStatus" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        b_loan_info
+        WHERE
+        product_status = #{productStatus}
+    </select>
 
 </mapper>

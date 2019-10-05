@@ -290,8 +290,9 @@ public class UserController {
     @RequestMapping("loan/myIncome")
     public ModelAndView myIncome(HttpServletRequest request, ModelMap model) {
         ModelAndView mv = new ModelAndView("myIncome");
-
         return mv;
     }
+
+
 
 }

@@ -100,5 +100,14 @@
         </trim>
     </insert>
 
+    <!--根据产品标识获取产品详情（不包含用户信息）-->
+    <select id="selectBidInfoByLoanId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        b_bid_info
+        WHERE
+        loan_id = #{loanId}
+    </select>
 
 </mapper>

@@ -8,12 +8,12 @@
    	<meta name="keywords" content="互联网金融平台，互联网金融产品，互联网金融公司"/>
    	<meta name="description" content="枨曦金融网是枨曦教育集团旗下一站式互联网金融平台.接入支付清算协会风险系统，用互联网技术和金融创新使投资与借贷更透明、更高效.优选互联网金融产品随心选。"/>
     <title>枨曦金融网官网-专业的互联网金融信息服务平台</title>
-    <link rel="stylesheet" type="text/css" href="css/share.css"/>
-    <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="css/ingot.css"/>
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
-    <script type="text/javascript" src="js/trafficStatistics.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/share.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/ingot.css"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.nivo.slider.pack.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/trafficStatistics.js"></script>
     <style type="text/css">body{background:#f2f2f2;}</style>
 </head>
 
@@ -154,7 +154,7 @@
 	
 	<!-- 散标start -->
 	<div class="mainBox pro-body disperse-pro clearfix">
-	  	<div class="new-pro-icon"><img src="images/new-pro-icon.png"/></div>
+	  	<div class="new-pro-icon"><img src="${pageContext.request.contextPath}/images/new-pro-icon.png"/></div>
 			<c:forEach items="${sLoanInfoList}" var="sLoanInfo" varStatus="index">
 				<!-- 1:已满标时追加pro-full-->
 				<div class="pro-box <c:if test='${sLoanInfo.leftProductMoney == 0}'>pro-full</c:if>">
@@ -243,15 +243,15 @@
                 <div class="pic-wap">
                     <div id="List1">
                         <!-- 图片列表 begin -->
-                        <div class="pic"><a title="金融安全认证权威机构"  href="http://webverify.cfca.com.cn/WebVerify/webVerifyServlet?domain=www.powernode.com" target="_blank" rel="nofollow"><img alt="" src="images/logo_cooperate_1.jpg"/></a></div>
-                        <div class="pic"><a title="专业的网络安全专家" href="http://cn.norton.com/" target="_blank" rel="nofollow"><img alt="" src="images/logo_cooperate_5.jpg"  /></a></div>
-                        <div class="pic"><a title="领先的诚信信息服务商" href="http://q.id5.cn/" target="_blank" rel="nofollow"><img alt="" src="images/logo_cooperate_4.jpg"  /></a></div>
-                        <div class="pic"><a title="IBM" href="http://www.ibm.com/cn/zh/" target="_blank" rel="nofollow"><img alt="" src="images/logo_cooperate_6.jpg" /></a></div>
-                        <div class="pic"><a title="NSFOCUS" href="http://www.nsfocus.com.cn/index.html" target="_blank" rel="nofollow"><img alt="" src="images/logo_cooperate_12.jpg" /></a></div>
-                        <div class="pic"><a title="CISCO" href="http://www.cisco.com/web/CN/index.html" target="_blank" rel="nofollow"><img alt="" src="images/logo_cooperate_13.jpg" /></a></div>
-                        <div class="pic"><a title="连连支付" href="http://www.lianlianpay.com/" target="_blank" rel="nofollow"><img alt="" src="images/logo_cooperate_14.jpg" /></a></div>
-                        <div class="pic"><a title="宝付" href="https://www.baofoo.com/" target="_blank" rel="nofollow"><img alt="" src="images/logo_cooperate_16.jpg" /></a></div>
-                        <div class="pic"><a title="富友" href="http://pay.fuiou.com/" target="_blank" rel="nofollow"><img alt="" src="images/logo_cooperate_17.jpg" /></a></div>
+                        <div class="pic"><a title="金融安全认证权威机构"  href="http://webverify.cfca.com.cn/WebVerify/webVerifyServlet?domain=www.powernode.com" target="_blank" rel="nofollow"><img alt="" src="${pageContext.request.contextPath}/images/logo_cooperate_1.jpg"/></a></div>
+                        <div class="pic"><a title="专业的网络安全专家" href="http://cn.norton.com/" target="_blank" rel="nofollow"><img alt="" src="${pageContext.request.contextPath}/images/logo_cooperate_5.jpg"  /></a></div>
+                        <div class="pic"><a title="领先的诚信信息服务商" href="http://q.id5.cn/" target="_blank" rel="nofollow"><img alt="" src="${pageContext.request.contextPath}/images/logo_cooperate_4.jpg"  /></a></div>
+                        <div class="pic"><a title="IBM" href="http://www.ibm.com/cn/zh/" target="_blank" rel="nofollow"><img alt="" src="${pageContext.request.contextPath}/images/logo_cooperate_6.jpg" /></a></div>
+                        <div class="pic"><a title="NSFOCUS" href="http://www.nsfocus.com.cn/index.html" target="_blank" rel="nofollow"><img alt="" src="${pageContext.request.contextPath}/images/logo_cooperate_12.jpg" /></a></div>
+                        <div class="pic"><a title="CISCO" href="http://www.cisco.com/web/CN/index.html" target="_blank" rel="nofollow"><img alt="" src="${pageContext.request.contextPath}/images/logo_cooperate_13.jpg" /></a></div>
+                        <div class="pic"><a title="连连支付" href="http://www.lianlianpay.com/" target="_blank" rel="nofollow"><img alt="" src="${pageContext.request.contextPath}/images/logo_cooperate_14.jpg" /></a></div>
+                        <div class="pic"><a title="宝付" href="https://www.baofoo.com/" target="_blank" rel="nofollow"><img alt="" src="${pageContext.request.contextPath}/images/logo_cooperate_16.jpg" /></a></div>
+                        <div class="pic"><a title="富友" href="http://pay.fuiou.com/" target="_blank" rel="nofollow"><img alt="" src="${pageContext.request.contextPath}/images/logo_cooperate_17.jpg" /></a></div>
                         <!-- 图片列表 end -->
                     </div>
                     <div id="List2"></div>
@@ -278,22 +278,22 @@ $(document).ready(function() {
 //轮播图(先静态写死)
 function loadCarouselPicture() {
 	var liStr = "<li data-opacity='0.2' style='display: none; background: url(";
-	liStr += "img/001.jpg) 50% 50% no-repeat;'><a href='";
+	liStr += "${pageContext.request.contextPath}/img/001.jpg) 50% 50% no-repeat;'><a href='";
 	liStr += "javascript:void(0)";
 	liStr += "' target='_blank'></a></li>";
 	liStr += "   ";
 	liStr += "<li data-opacity='0.2' style='display: none; background: url(";
-	liStr += "img/002.jpg) 50% 50% no-repeat;'><a href='";
+	liStr += "${pageContext.request.contextPath}/img/002.jpg) 50% 50% no-repeat;'><a href='";
 	liStr += "javascript:void(0)";
 	liStr += "' target='_blank'></a></li>";
 	liStr += "   ";
 	liStr += "<li data-opacity='0.2' style='display: none; background: url(";
-	liStr += "img/003.jpg) 50% 50% no-repeat;'><a href='";
+	liStr += "${pageContext.request.contextPath}/img/003.jpg) 50% 50% no-repeat;'><a href='";
 	liStr += "javascript:void(0)";
 	liStr += "' target='_blank'></a></li>";
 	liStr += "   ";
 	liStr += "<li data-opacity='0.2' style='display: none; background: url(";
-	liStr += "img/004.jpg) 50% 50% no-repeat;'><a href='";
+	liStr += "${pageContext.request.contextPath}/img/004.jpg) 50% 50% no-repeat;'><a href='";
 	liStr += "javascript:void(0)";
 	liStr += "' target='_blank'></a></li>";
 	liStr += "   ";
@@ -302,6 +302,6 @@ function loadCarouselPicture() {
 	slideSwitch();
 }
 </script>
-<script type="text/javascript" src="js/scroll.1.3.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/scroll.1.3.js"></script>
 </body>
 </html>

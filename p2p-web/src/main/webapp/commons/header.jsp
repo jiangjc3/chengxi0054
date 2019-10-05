@@ -23,7 +23,7 @@
                 <div class="phone-ewm" style="display:none;">
                     <a href="javascript:void(0)" class="phone_jinxin"><i></i>手机客户端</a>
                     <div class="phone-ewm-dropdown">
-                        <span><img src="images/phone_jinxin_ewm.png" alt=""></span>
+                        <span><img src="${pageContext.request.contextPath}/images/phone_jinxin_ewm.png" alt=""></span>
                         <p>下载枨曦宝APP</p>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                                 <div class="down-bk">
                                     <div class="user-balance">余额：<span id="frame_top"><i>¥ ${user.availableMoney} </i></span>元</div>
                                     <ul class="quick-entry clearfix">
-                                        <li class="icon-recharge"><a href="toRecharge.jsp"><i></i><span>充值</span></a>
+                                        <li class="icon-recharge"><a href="loan/toRecharge"><i></i><span>充值</span></a>
                                         </li>
                                         <li class="icon-invest" style="margin-left:85px;"><a
                                                 href="loan/loan"><i></i><span>投资</span></a>
@@ -80,7 +80,7 @@
                                     <div class="enter">进入“<a
                                             href="loan/myCenter">我的小金库</a>”
                                     </div>
-                                    <div class="exit"><a href="${pageContext.request.contextPath}/loan/logout">退出</a>
+                                    <div class="exit"><a href="loan/logout">退出</a>
                                     </div>
                                 </div>
                             </div>
@@ -100,12 +100,12 @@
         <div class="ewm_weixin">
             <h3>枨曦网服务号</h3>
             <h4>更多服务请关注枨曦网服务号</h4>
-            <div class="ewm"><img src="images/ewm_fwh.jpg" alt="枨曦网服务号"></div>
+            <div class="ewm"><img src="${pageContext.request.contextPath}/images/ewm_fwh.jpg" alt="枨曦网服务号"></div>
         </div>
         <div class="ewm_weixin">
             <h3>枨曦网订阅号</h3>
             <h4>获取枨曦网最新资讯</h4>
-            <div class="ewm"><img src="images/ewm_dyh.jpg" alt="枨曦网订阅号"></div>
+            <div class="ewm"><img src="${pageContext.request.contextPath}/images/ewm_dyh.jpg" alt="枨曦网订阅号"></div>
         </div>
     </div>
     <!-- 二维码弹出层end -->
