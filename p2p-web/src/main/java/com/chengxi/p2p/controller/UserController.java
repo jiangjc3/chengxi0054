@@ -273,4 +273,25 @@ public class UserController {
         return mv;
     }
 
+    @RequestMapping("loan/myInvest")
+    public ModelAndView myInvest(HttpServletRequest request, ModelMap model) {
+        ModelAndView mv = new ModelAndView("myInvest");
+
+        return mv;
+    }
+
+    @RequestMapping("loan/myRecharge")
+    public ModelAndView myRecharge(HttpServletRequest request, ModelMap model) {
+        ModelAndView mv = new ModelAndView("myRecharge");
+
+        return mv;
+    }
+
+    @RequestMapping("loan/myIncome")
+    public ModelAndView myIncome(HttpServletRequest request, ModelMap model) {
+        ModelAndView mv = new ModelAndView("myIncome");
+
+        return mv;
+    }
+
 }

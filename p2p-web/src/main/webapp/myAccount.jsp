@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -5,7 +6,7 @@
     <title>枨曦金融网-CFCA认证的互联网金融公司</title>
     <script language="javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/trafficStatistics.js"></script>
-    <link rel="stylesheet" type="text/css" href="http://www.jinxin99.cn/static/ssl/css/share.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/share.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/security.css"/>
     <script type="text/javascript">
@@ -33,11 +34,7 @@
     <div class="homeWap">
         <div class="fund-guanli clearfix">
             <!-- 账户设置中左边菜单start -->
-            <%--<div class="left-nav">
-                <jsp:include page="commons/leftNav.jsp"/>
-            </div>--%>
             <!-- 左边菜单end -->
-
             <div class="right-body securityCenter">
                 <div class="right-wap">
                     <div class="securityOuter">
@@ -77,11 +74,11 @@
                             </dd>
                             <dd>
                                 <span class="name">注册时间</span>
-                                <span class="txt">${user.addTime}</span>
+                                <span class="txt"><fmt:formatDate value="${user.addTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
                             </dd>
                             <dd>
                                 <span class="name">最近登录</span>
-                                <span class="txt">${user.lastLoginTime}</span>
+                                <span class="txt"><fmt:formatDate value="${user.lastLoginTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
                             </dd>
                         </dl>
                     </div>

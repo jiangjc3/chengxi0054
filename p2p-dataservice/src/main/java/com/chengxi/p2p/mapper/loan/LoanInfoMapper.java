@@ -2,6 +2,7 @@ package com.chengxi.p2p.mapper.loan;
 
 import com.chengxi.p2p.model.loan.LoanInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -23,4 +24,6 @@ public interface LoanInfoMapper {
     int updateLeftProductMoneyByLoanId(Map<String, Object> paramMap);
 
     int updateByPrimaryKeySelective(LoanInfo updateLoanInfo);
+
+    List<LoanInfo> selectLoanInfos(@Param(value="productType")Integer ptype);
 }

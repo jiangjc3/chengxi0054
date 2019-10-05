@@ -10,6 +10,8 @@ import com.chengxi.p2p.model.vo.PaginatinoVO;
 import com.chengxi.p2p.service.loan.BidInfoService;
 import com.chengxi.p2p.service.loan.LoanInfoService;
 import com.chengxi.p2p.service.user.FinanceAccountService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +38,7 @@ public class LoanInfoController {
     @Reference
     private FinanceAccountService financeAccountService;
 
-    @RequestMapping(value = "/loan/loan")
+    /*@RequestMapping(value = "/loan/loan")
     public String loan(HttpServletRequest request, Model model,
                        @RequestParam(value = "ptype", required = false) Integer ptype,
                        @RequestParam(value = "currentPage", required = false) Integer currentPage) {
@@ -79,6 +81,59 @@ public class LoanInfoController {
         model.addAttribute("totalPage", totalPage);
         //每页显示的数据
         model.addAttribute("loanInfoList", paginatinoVO.getDataList());
+        //当前页码
+        model.addAttribute("currentPage", currentPage);
+
+        if (null != ptype) {
+            //产品类型
+            model.addAttribute("ptype", ptype);
+        }
+
+        //用户投资排行榜
+        List<BidUserTop> bidUserTopList = bidInfoService.queryBidUserTop();
+        model.addAttribute("bidUserTopList", bidUserTopList);
+
+        return "loan";
+    }*/
+
+
+    @RequestMapping(value = "/loan/loan")
+    public String loan(HttpServletRequest request, Model model,
+                       @RequestParam(value = "ptype", required = false) Integer ptype,
+                       @RequestParam(value = "currentPage", required = false) Integer currentPage) {
+
+        //判断当前页码是否为空，为空，默认值为第1页
+        if (null == currentPage) {
+            //默认为第1页
+            currentPage = 1;
+        }
+        //准备分页查询参数
+        Map<String, Integer> paramMap = new HashMap();
+
+        if (null != ptype) {
+            //产品类型
+            paramMap.put("productType", ptype);
+        }
+        int pageSize = 9;
+
+        paramMap.put("currentPage", (currentPage - 1) * pageSize);
+
+        //截取长度，每页显示条数
+        paramMap.put("pageSize", pageSize);
+
+        PageInfo<LoanInfo> pageInfo = loanInfoService.queryLoanInfoListByType(paramMap);
+
+
+        //计算总页数
+
+        int totalPage = pageInfo.getPages();
+
+        //总记录数
+        model.addAttribute("totalRows", pageInfo.getTotal());
+        //总页数
+        model.addAttribute("totalPage", totalPage);
+        //每页显示的数据
+        model.addAttribute("loanInfoList", pageInfo.getList());
         //当前页码
         model.addAttribute("currentPage", currentPage);
 

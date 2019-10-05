@@ -4,6 +4,8 @@ import com.chengxi.p2p.constants.BizConstant;
 import com.chengxi.p2p.mapper.loan.LoanInfoMapper;
 import com.chengxi.p2p.model.loan.LoanInfo;
 import com.chengxi.p2p.model.vo.PaginatinoVO;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -68,5 +70,14 @@ public class LoanInfoServiceImpl implements LoanInfoService {
 
 
         return paginatinoVO;
+    }
+
+    @Override
+    public PageInfo queryLoanInfoListByType(Map<String, Integer> paraMap) {
+        PageHelper.startPage(paraMap.get("currentPage"), paraMap.get("pageSize"));
+        List<LoanInfo> loanInfos = loanInfoMapper.selectLoanInfos(paraMap.get("productType"));
+        PageInfo<LoanInfo> pageInfo = new PageInfo<>(loanInfos);
+
+        return pageInfo;
     }
 }
