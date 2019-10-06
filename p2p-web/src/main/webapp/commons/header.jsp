@@ -32,7 +32,7 @@
     </div>
     <div class="headCnt clearfix">
         <div class="logo"><a href="${pageContext.request.contextPath}"><img
-                src="${pageContext.request.contextPath}/images/logo.jpg"></a></div>
+                src="${pageContext.request.contextPath}/images/mylogo.JPG"></a></div>
         <ul class="main-nav">
             <li><h2><a id="jinxin" href="${pageContext.request.contextPath}">首页<i></i></a></h2></li><!--current为当前状态-->
             <li>
@@ -63,7 +63,7 @@
                         <!--登录后begin-->
                         <div class="logged">
                             <div class="userinfo-up">
-                                <a href="loan/myCenter" class="user-phone">${user.phone}</a><a
+                                <a href="${pageContext.request.contextPath}/loan/myCenter" class="user-phone">${user.phone}</a><a
                                     href="/webPage/account/member_systems.html" class="user-vip"
                                     id="member">VIP1</a><i></i>
                             </div>
@@ -71,16 +71,16 @@
                                 <div class="down-bk">
                                     <div class="user-balance">余额：<span id="frame_top"><i>¥ ${user.availableMoney} </i></span>元</div>
                                     <ul class="quick-entry clearfix">
-                                        <li class="icon-recharge"><a href="loan/toRecharge"><i></i><span>充值</span></a>
+                                        <li class="icon-recharge"><a href="${pageContext.request.contextPath}/loan/toRecharge"><i></i><span>充值</span></a>
                                         </li>
                                         <li class="icon-invest" style="margin-left:85px;"><a
-                                                href="loan/loan"><i></i><span>投资</span></a>
+                                                href="${pageContext.request.contextPath}/loan/loan"><i></i><span>投资</span></a>
                                         </li>
                                     </ul>
                                     <div class="enter">进入“<a
-                                            href="loan/myCenter">我的小金库</a>”
+                                            href="${pageContext.request.contextPath}/loan/myCenter">我的小金库</a>”
                                     </div>
-                                    <div class="exit"><a href="loan/logout">退出</a>
+                                    <div class="exit"><a href="${pageContext.request.contextPath}/loan/logout">退出</a>
                                     </div>
                                 </div>
                             </div>
