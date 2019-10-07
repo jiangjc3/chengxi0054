@@ -6,11 +6,9 @@ import com.chengxi.p2p.model.loan.LoanInfo;
 import com.chengxi.p2p.model.user.FinanceAccount;
 import com.chengxi.p2p.model.user.User;
 import com.chengxi.p2p.model.vo.BidUserTop;
-import com.chengxi.p2p.model.vo.PaginatinoVO;
 import com.chengxi.p2p.service.loan.BidInfoService;
 import com.chengxi.p2p.service.loan.LoanInfoService;
 import com.chengxi.p2p.service.user.FinanceAccountService;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
@@ -151,6 +149,13 @@ public class LoanInfoController {
         return "loan";
     }
 
+    /**
+     * 立即投资
+     * @param request
+     * @param model
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/loan/loanInfo")
     public String loanInfo(HttpServletRequest request, Model model,
                            @RequestParam(value = "id", required = true) Integer id) {

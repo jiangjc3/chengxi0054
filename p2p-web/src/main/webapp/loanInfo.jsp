@@ -288,7 +288,9 @@
     function closeit() {
         $("#failurePayment").hide();
         $("#dialog-overlay1").hide();
-        window.location.href = "${pageContext.request.contextPath}/index";
+        var loanId = "${loanInfo.id}";
+        <%--window.location.href = "${pageContext.request.contextPath}/index";--%>
+        window.location.href = "${pageContext.request.contextPath}/loan/loanInfo?id=${loanInfo.id}";
     }
 </script>
 </body>

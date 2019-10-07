@@ -15,7 +15,7 @@
 <div class="headBody" id="headBody">
     <div class="header">
         <div class="mainBox clearfix">
-            <div class="head_l"><span>客服电话：400-8080-105</span><em></em><a href="http://weibo.com/bjpowernode"
+            <div class="head_l"><span>客服电话：400-8080-105</span><em></em><a href="http://weibo.com/chengxi"
                                                                           target="_blank" class="weibo"></a></div>
             <div class="head_r"><a href="javascript:void(0);" id="helpcenter.html">帮助中心</a><em></em><a
                     href="javascript:void(0);" id="/webPage/invest/phone_jinxin.html" class="phone_jinxin"
