@@ -7,14 +7,11 @@
 <title>正在加载...</title>
 </head>
 <body>
-<form action="${alipay_pay_url}" method="post">
-	<input type="hidden" id="uid" name="uid" value="${sessionScope.user.id}"/>
-	<input type="hidden" id="totalAmount" name="totalAmount" value="${rechargeMoney}"/>
-    <input type="hidden" id="outTradeNo" name="outTradeNo" value="${rechargeNo}"/>
-	<input type="hidden" id="subject" name="subject" value="购买理财产品"/>
-	<input type="hidden" id="body" name="body" value="p2p理财支付"/>
-	<input type="hidden" id="returnUrl" name="returnUrl" value="${alipay_return_url}"/>
-	<input type="hidden" id="notifyUrl" name="notifyUrl" value="${alipay_notify_url}"/>
+<form action="${p2p_pay_alipay_url}" method="post">
+	<input type="hidden" name="out_trade_no" value="${rechargeNo}"/>
+	<input type="hidden" name="total_amount" value="${rechargeMoney}"/>
+	<input type="hidden" name="subject" value="${subject}"/>
+	<input type="hidden" name="body" value="${body}"/>
 </form>
 <script>document.forms[0].submit();</script>
 </body>

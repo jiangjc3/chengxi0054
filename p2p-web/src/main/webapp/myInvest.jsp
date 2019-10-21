@@ -71,44 +71,48 @@
                                 <span class="deal-type" style="width:120px">投资状态</span>
                                 <span class="deal-money">投资金额(元)</span>
                             </dt>
-                            <dd>
-                                <div class="deal-time">2016-01-03 12:23:32</div>
-                                <div class="deal-name">新手宝</div>
-                                <div class="deal-type" style="width:120px">
-                                    <!-- 判断投资状态是否为1，即成功 -->
-                                    投资成功
-                                </div>
-                                <div class="deal-money">100.0</div>
-                            </dd>
-                            <dd>
-                                <div class="deal-time">2016-01-03 12:23:32</div>
-                                <div class="deal-name">新手宝</div>
-                                <div class="deal-type" style="width:120px">
-                                    <!-- 判断投资状态是否为1，即成功 -->
-                                    投资成功
-                                </div>
-                                <div class="deal-money">100.0</div>
-                            </dd>
-                            <dd>
-                                <div class="deal-time">2016-01-03 12:23:32</div>
-                                <div class="deal-name">新手宝</div>
-                                <div class="deal-type" style="width:120px">
-                                    <!-- 判断投资状态是否为1，即成功 -->
-                                    投资成功
-                                </div>
-                                <div class="deal-money">100.0</div>
-                            </dd>
+                            <c:forEach items="${bidInfoList}" var="bidInfo">
+                                <dd>
+                                    <div class="deal-time"><fmt:formatDate value="${bidInfo.bidTime}" pattern="yyyy-MM-dd HH:mm:ss" /></div>
+                                    <div class="deal-name">${bidInfo.loanInfo.productName}</div>
+                                    <div class="deal-type" style="width:120px">
+                                        <!-- 判断投资状态是否为1，即成功 -->
+                                        <c:choose>
+                                            <c:when test="${bidInfo.bidStatus eq 1}">投资成功</c:when>
+                                            <c:otherwise>投资失败</c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                    <div class="deal-money">${bidInfo.bidMoney }</div>
+                                </dd>
+
+                            </c:forEach>
+
                             &nbsp;&nbsp;
 
                             <div class="touzi_fenye" style="width:100%;text-align:center;">
-                                共20条3页　当前为第 1 页
-                                <a id="linkHomePage" href="${pageContext.request.contextPath}/loan/myInvest">首页</a>
-                                <a id="linkPreviousPage"
-                                   href="${pageContext.request.contextPath}/loan/myInvest?currentPage=${currentPage-1}">上一页</a>
-                                <a id="linkNextPage"
-                                   href="${pageContext.request.contextPath}/loan/myInvest?currentPage=${currentPage+1}">下一页 </a>
-                                <a id="linkLastPage"
-                                   href="${pageContext.request.contextPath}/loan/myInvest?currentPage=${totalPage}">尾页</a>
+                                共${totalRows}条${totalPage}页　当前为第 ${currentPage} 页
+                                <c:choose>
+                                    <c:when test="${currentPage eq 1}">
+                                        首页
+                                        上一页
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a id="linkHomePage" href="${pageContext.request.contextPath}/loan/myInvest">首页</a>
+                                        <a id="linkPreviousPage" href="${pageContext.request.contextPath}/loan/myInvest?currentPage=${currentPage-1}">上一页</a>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <c:choose>
+                                    <c:when test="${currentPage eq totalPage}">
+                                        下一页
+                                        尾页
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a id="linkNextPage" href="${pageContext.request.contextPath}/loan/myInvest?currentPage=${currentPage+1}">下一页 </a>
+                                        <a id="linkLastPage" href="${pageContext.request.contextPath}/loan/myInvest?currentPage=${totalPage}">尾页</a>
+
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
 
                         </dl>

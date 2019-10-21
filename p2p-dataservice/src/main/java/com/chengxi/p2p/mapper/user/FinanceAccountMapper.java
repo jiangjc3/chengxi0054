@@ -18,4 +18,11 @@ public interface FinanceAccountMapper {
     int updateFinanceAccountByBid(Map<String, Object> paramMap);
 
     int updateFinanceAccountByIncomeBack(Map<String, Object> paramMap);
+
+    /**
+     * 用户充值：更新帐户可用余额
+     * @param paramMap
+     * @return
+     */
+    int updateFinanceAccountByRecharge(Map<String, Object> paramMap);
 }

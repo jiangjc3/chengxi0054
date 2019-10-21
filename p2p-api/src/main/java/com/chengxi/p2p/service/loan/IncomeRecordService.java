@@ -1,6 +1,7 @@
 package com.chengxi.p2p.service.loan;
 
 import com.chengxi.p2p.model.loan.IncomeRecord;
+import com.chengxi.p2p.model.vo.PaginatinoVO;
 
 import java.util.List;
 import java.util.Map;
@@ -26,4 +27,6 @@ public interface IncomeRecordService {
      * 收益返还
      */
     void generateIncomeBack();
+
+    PaginatinoVO<IncomeRecord> queryIncomeRecordByPage(Map<String, Object> paramMap);
 }

@@ -8,6 +8,7 @@ import com.chengxi.p2p.mapper.user.FinanceAccountMapper;
 import com.chengxi.p2p.model.loan.BidInfo;
 import com.chengxi.p2p.model.loan.IncomeRecord;
 import com.chengxi.p2p.model.loan.LoanInfo;
+import com.chengxi.p2p.model.vo.PaginatinoVO;
 import com.chengxi.p2p.utils.DateUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
@@ -134,5 +135,18 @@ public class IncomeRecordServiceImpl implements IncomeRecordService {
                 logger.info("收益标识为" + incomeRecord.getId() + ",更新帐户余额失败");
             }
         }
+    }
+
+    @Override
+    public PaginatinoVO<IncomeRecord> queryIncomeRecordByPage(Map<String, Object> paramMap) {
+        PaginatinoVO<IncomeRecord> paginationVO = new PaginatinoVO<>();
+
+        List<IncomeRecord> incomeRecordList = incomeRecordMapper.selectIncomeRecordByPage(paramMap);
+        Long incomerecordConut = incomeRecordMapper.slectIncomeRecordCountByUid(paramMap);
+
+        paginationVO.setTotal(incomerecordConut);
+        paginationVO.setDataList(incomeRecordList);
+
+        return paginationVO;
     }
 }

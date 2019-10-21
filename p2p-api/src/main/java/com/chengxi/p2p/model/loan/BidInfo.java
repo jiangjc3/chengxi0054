@@ -23,6 +23,16 @@ public class BidInfo implements Serializable {
 
     private User user;
 
+    private LoanInfo loanInfo;
+
+    public LoanInfo getLoanInfo() {
+        return loanInfo;
+    }
+
+    public void setLoanInfo(LoanInfo loanInfo) {
+        this.loanInfo = loanInfo;
+    }
+
     public User getUser() {
         return user;
     }

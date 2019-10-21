@@ -24,4 +24,6 @@ public interface IncomeRecordMapper {
     List<IncomeRecord> selectIncomeRecordByIncomeStatusAndIncomeDate(Integer incomeStatus);
 
     int updateByPrimaryKeySelective(IncomeRecord record);
+
+    Long slectIncomeRecordCountByUid(Map<String, Object> paramMap);
 }

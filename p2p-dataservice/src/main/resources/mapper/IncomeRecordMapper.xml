@@ -163,4 +163,14 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+    <!-- 根据用户表示查询收益记录总条数 -->
+    <select id="slectIncomeRecordCountByUid" resultType="java.lang.Long">
+		select
+			count(*)
+		from
+			b_income_record
+		where
+			uid = #{uid}
+	</select>
+
 </mapper>

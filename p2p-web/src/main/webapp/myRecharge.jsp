@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -55,39 +56,48 @@ $(document).ready(function(){
        	<span class="deal-money">充值金额(元)</span>
        	<span class="deal-balance">充值状态</span>
        </dt>
-       <dd>
-	       <div class="deal-time">2016-09-18 10:23:11</div>
-	       <div class="deal-name">支付理财</div>
-	       <div class="deal-type" style="width:120px">充值</div>
-	       <div class="deal-money">100.0</div>
-	       <div class="deal-balance">
-	       		充值成功
-	       </div>
-       </dd>
-       <dd>
-	       <div class="deal-time">2016-09-18 10:23:11</div>
-	       <div class="deal-name">支付理财</div>
-	       <div class="deal-type" style="width:120px">充值</div>
-	       <div class="deal-money">100.0</div>
-	       <div class="deal-balance">
-	       		充值中
-	       </div>
-       </dd>
-       <dd>
-	       <div class="deal-time">2016-09-18 10:23:11</div>
-	       <div class="deal-name">支付理财</div>
-	       <div class="deal-type" style="width:120px">充值</div>
-	       <div class="deal-money">100.0</div>
-	       <div class="deal-balance">
-	       		充值失败
-	       </div>
-       </dd>
+		  <c:forEach items="${rechargeRecordList}" var="rechargeRecord">
+			  <dd>
+				  <div class="deal-time"><fmt:formatDate value="${rechargeRecord.rechargeTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </div>
+				  <div class="deal-name">${rechargeRecord.rechargeDesc}</div>
+				  <div class="deal-type" style="width:120px">充值</div>
+				  <div class="deal-money">${rechargeRecord.rechargeMoney}</div>
+				  <div class="deal-balance">
+						  <%--充值状态：0充值中，1充值成功，2充值失败--%>
+					  <c:choose>
+						  <c:when test="${rechargeRecord.rechargeStatus eq 0}">充值中</c:when>
+						  <c:when test="${rechargeRecord.rechargeStatus eq 1}">充值成功</c:when>
+						  <c:otherwise>充值失败</c:otherwise>
+					  </c:choose>
+				  </div>
+			  </dd>
+		  </c:forEach>
 		<div class="touzi_fenye" style="width:100%; text-align:center;line-height:30px;">
-			共10条2页　当前为第1页　
-				<a id="linkHomePage" href="${pageContext.request.contextPath}/loan/myRecharge">首页</a>
-				<a id="linkPreviousPage" href="${pageContext.request.contextPath}/loan/myRecharge?currentPage=${currentPage-1}">上一页</a>
-				<a id="linkNextPage" href="${pageContext.request.contextPath}/loan/myRecharge?currentPage=${currentPage+1}">下一页 </a>
-				<a id="linkLastPage" href="${pageContext.request.contextPath}/loan/myRecharge?currentPage=${totalPage}">尾页</a>
+			共${totalRows}条${totalPage}页 &nbsp;&nbsp;　当前为第${currentPage}页
+			<c:choose>
+				<c:when test="${currentPage eq 1}">
+					首页
+					上一页
+				</c:when>
+				<c:otherwise>
+					<a id="linkHomePage" href="${pageContext.request.contextPath}/loan/myRecharge">首页</a>
+					<a id="linkPreviousPage"
+					   href="${pageContext.request.contextPath}/loan/myRecharge?currentPage=${currentPage-1}">上一页</a>
+				</c:otherwise>
+			</c:choose>
+
+			<c:choose>
+				<c:when test="${currentPage eq totalPage}">
+					下一页
+					尾页
+				</c:when>
+				<c:otherwise>
+					<a id="linkNextPage"
+					   href="${pageContext.request.contextPath}/loan/myRecharge?currentPage=${currentPage+1}">下一页 </a>
+					<a id="linkLastPage"
+					   href="${pageContext.request.contextPath}/loan/myRecharge?currentPage=${totalPage}">尾页</a>
+				</c:otherwise>
+			</c:choose>
 		</div>
       </dl>
      </div>

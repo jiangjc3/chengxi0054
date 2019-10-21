@@ -53,8 +53,8 @@
                     <li class="availMoney">
                         <h3>可用余额：</h3>
                         <span class="moneyIcon"><i>¥ ${financeAccount.availableMoney} 元</i></span>
-                        <a class="recharge" href="loan/toRecharge">充值</a>
-                        <a class="inves" href="loan/loan">投资</a>
+                        <a class="recharge" href="${pageContext.request.contextPath}/loan/toRecharge">充值</a>
+                        <a class="inves" href="${pageContext.request.contextPath}/loan/loan">投资</a>
                     </li>
                 </ul>
             </div>
@@ -73,12 +73,14 @@
                             <span class="money">投资金额</span>
                             <span class="profit">投资时间</span>
                         </dt>
-                        <dd>
-                            <span class="name">1</span>
-                            <span id="preparedLoanTotalLoanCount" class="number">个人消费贷</span>
-                            <span id="preparedLoanTotalBidMoney" class="money">5000.0</span>
-                            <span id="preparedLoanTotalIncome" class="profit">2017-06-12</span>
-                        </dd>
+                        <c:forEach items="${bidInfoList}" var="bidInfo" varStatus="index">
+                            <dd>
+                                <span class="name">${index.count}</span>
+                                <span id="preparedLoanTotalLoanCount" class="number">${bidInfo.loanInfo.productName}</span>
+                                <span id="preparedLoanTotalBidMoney" class="money">${bidInfo.bidMoney }</span>
+                                <span id="preparedLoanTotalIncome" class="profit"><fmt:formatDate value="${bidInfo.bidTime}" pattern="yyyy-MM-dd"/></span>
+                            </dd>
+                        </c:forEach>
                         <%--<dd>
                             <span class="name">2</span>
                             <span id="preparedLoanTotalLoanCount" class="number">个人消费贷</span>
@@ -106,12 +108,14 @@
                         <span class="money">充值金额</span>
                         <span class="money">充值时间</span>
                     </dt>
-                    <dd>
-                        <span class="name">1</span>
-                        <span id="preparedLoanStandardTotalLoanCount" class="number">支付理财</span>
-                        <span id="preparedLoanStandardTotalBidMoney" class="money">1000.0</span>
-                        <span id="preparedLoanStandardTotalIncome" class="profit">2017-05-01</span>
-                    </dd>
+                    <c:forEach items="${rechargeRecordList}" var="rechargeRecord" varStatus="seq">
+                        <dd>
+                            <span class="name">${seq.count }</span>
+                            <span id="preparedLoanStandardTotalLoanCount" class="number">${rechargeRecord.rechargeDesc}</span>
+                            <span id="preparedLoanStandardTotalBidMoney" class="money">${rechargeRecord.rechargeMoney }</span>
+                            <span id="preparedLoanStandardTotalIncome" class="profit"><fmt:formatDate value="${rechargeRecord.rechargeTime }" pattern="yyyy-MM-dd"/></span>
+                        </dd>
+                    </c:forEach>
                     <%--<dd>
                         <span class="name">2</span>
                         <span id="preparedLoanStandardTotalLoanCount" class="number">支付理财</span>
@@ -139,13 +143,14 @@
                         <span class="number name" style="text-align:center;">收益日期</span>
                         <span class="profit">收益金额</span>
                     </dt>
-                    <dd>
-                        <span class="number" style="text-align:left;">1</span>
-                        <span id="preparedLoanStandardTotalLoanCount" class="number">新手宝</span>
-                        <span id="preparedLoanStandardTotalIncome" class="number name" style="text-align:center;">2017-05-12</span>
-                        <span id="preparedLoanStandardTotalBidMoney" class="profit">12.6</span>
-
-                    </dd>
+                    <c:forEach items="${incomeRecordList}" var="incomeRecord" varStatus="seri">
+                        <dd>
+                            <span class="number" style="text-align:left;">${seri.count }</span>
+                            <span id="preparedLoanStandardTotalLoanCount" class="number">${incomeRecord.loanInfo.productName}</span>
+                            <span id="preparedLoanStandardTotalIncome" class="number name" style="text-align:center;"><fmt:formatDate value="${incomeRecord.incomeDate}" pattern="yyyy-MM-dd"/></span>
+                            <span id="preparedLoanStandardTotalBidMoney" class="profit">${incomeRecord.incomeMoney}</span>
+                        </dd>
+                    </c:forEach>
                     <%--<dd>
                         <span class="number" style="text-align:left;">2</span>
                         <span id="preparedLoanStandardTotalLoanCount" class="number">个人消费贷</span>

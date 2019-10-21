@@ -7,6 +7,7 @@ import com.chengxi.p2p.mapper.user.FinanceAccountMapper;
 import com.chengxi.p2p.model.loan.BidInfo;
 import com.chengxi.p2p.model.loan.LoanInfo;
 import com.chengxi.p2p.model.vo.BidUserTop;
+import com.chengxi.p2p.model.vo.PaginatinoVO;
 import com.chengxi.p2p.model.vo.ResultObject;
 import com.chengxi.p2p.service.loan.BidInfoService;
 import org.apache.dubbo.config.annotation.Service;
@@ -63,6 +64,10 @@ public class BidInfoServiceImpl implements BidInfoService {
         return bidInfoMapper.selectBidInfoListByLoanId(id);
     }
 
+    /**
+     * 用户投资排行榜
+     * @return
+     */
     @Override
     public List<BidUserTop> queryBidUserTop() {
         List<BidUserTop> bidUserTopList = new ArrayList<BidUserTop>();
@@ -144,5 +149,18 @@ public class BidInfoServiceImpl implements BidInfoService {
             resultObject.setErrorCode(BizConstant.FAIL);
         }
         return resultObject;
+    }
+
+    @Override
+    public PaginatinoVO<BidInfo> queryBidInfoByPage(Map<String, Object> paramMap) {
+        PaginatinoVO<BidInfo> paginationVO = new PaginatinoVO<BidInfo>();
+        paginationVO.setDataList(bidInfoMapper.selectBidInfoByPage(paramMap));
+        paginationVO.setTotal(bidInfoMapper.selectTotal(paramMap));
+        return paginationVO;
+    }
+
+    @Override
+    public List<BidInfo> queryBidInfoTopByUid(Map<String, Object> paramMap) {
+        return bidInfoMapper.selectBidInfoByPage(paramMap);
     }
 }

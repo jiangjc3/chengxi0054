@@ -3,9 +3,15 @@ package com.chengxi.p2p.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.chengxi.p2p.config.CommonProperties;
 import com.chengxi.p2p.constants.BizConstant;
+import com.chengxi.p2p.model.loan.BidInfo;
+import com.chengxi.p2p.model.loan.IncomeRecord;
+import com.chengxi.p2p.model.loan.RechargeRecord;
 import com.chengxi.p2p.model.user.FinanceAccount;
 import com.chengxi.p2p.model.user.User;
 import com.chengxi.p2p.model.vo.ResultObject;
+import com.chengxi.p2p.service.loan.BidInfoService;
+import com.chengxi.p2p.service.loan.IncomeRecordService;
+import com.chengxi.p2p.service.loan.RechargeRecordService;
 import com.chengxi.p2p.service.user.FinanceAccountService;
 import com.chengxi.p2p.service.user.UserService;
 import com.chengxi.p2p.utils.HttpClientUtils;
@@ -26,7 +32,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 /**
@@ -44,6 +52,15 @@ public class UserController {
 
     @Autowired
     private CommonProperties commonProperties;
+
+    @Reference
+    private BidInfoService bidInfoService;
+
+    @Reference
+    private RechargeRecordService rechargeRecordService;
+
+    @Reference
+    private IncomeRecordService incomeRecordService;
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -174,7 +191,26 @@ public class UserController {
         //根据用户标识获取帐户可用余额
         FinanceAccount financeAccount = financeAccountService.queryFinanceAccountByUid(sessionUser.getId());
 
-        model.addAttribute("financeAccount",financeAccount);
+        //准备请求参数
+        Map<String,Object> paramMap = new ConcurrentHashMap<String,Object>();
+        paramMap.put("uid", sessionUser.getId());//用户标识
+        paramMap.put("currentPage", 0);//页码
+        paramMap.put("pageSize", 5);//每页显示条数
+
+        //查询最近的投资记录
+        List<BidInfo> bidInfoList = bidInfoService.queryBidInfoTopByUid(paramMap);
+
+        //查询最近的充值记录
+        List<RechargeRecord> rechargeRecordList = rechargeRecordService.queryRechargeRecordTopByUid(paramMap);
+
+        //查询最近的收益记录
+        List<IncomeRecord> incomeRecordList = incomeRecordService.queryIncomeRecordTopByUid(paramMap);
+
+        //将以上查询结果存放到model对象中
+        model.addAttribute("financeAccount", financeAccount);
+        model.addAttribute("bidInfoList", bidInfoList);
+        model.addAttribute("rechargeRecordList", rechargeRecordList);
+        model.addAttribute("incomeRecordList", incomeRecordList);
         ModelAndView mv = new ModelAndView("myCenter", model);
         return mv;
     }
@@ -273,26 +309,23 @@ public class UserController {
         return mv;
     }
 
-    @RequestMapping("loan/myInvest")
+    /*@RequestMapping("loan/myInvest")
     public ModelAndView myInvest(HttpServletRequest request, ModelMap model) {
         ModelAndView mv = new ModelAndView("myInvest");
 
         return mv;
-    }
+    }*/
 
-    @RequestMapping("loan/myRecharge")
+    /*@RequestMapping("loan/myRecharge")
     public ModelAndView myRecharge(HttpServletRequest request, ModelMap model) {
         ModelAndView mv = new ModelAndView("myRecharge");
-
         return mv;
-    }
+    }*/
 
-    @RequestMapping("loan/myIncome")
+    /*@RequestMapping("loan/myIncome")
     public ModelAndView myIncome(HttpServletRequest request, ModelMap model) {
         ModelAndView mv = new ModelAndView("myIncome");
         return mv;
-    }
-
-
+    }*/
 
 }

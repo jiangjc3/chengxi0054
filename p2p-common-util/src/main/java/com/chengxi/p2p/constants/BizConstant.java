@@ -75,4 +75,9 @@ public class BizConstant {
      * 唯一数字
      */
     public static final String ONLY_NUMBER = "onlyNumber";
+
+    /**
+     * 每页显示条数
+     */
+    public static final Integer PAGE_SIZE = 9;
 }

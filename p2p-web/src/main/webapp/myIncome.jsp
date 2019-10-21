@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -42,44 +43,62 @@ $(document).ready(function() {
    <div class="right-body">
     <div class="right-wap">
      <div class="deal-data">
-      <dl>
-       <dt>
-       <span class="deal-time">收益日期</span>
-       <span class="deal-name">收益金额</span>
-       <span class="deal-type" style="width:120px">投资产品</span>
-       <span class="deal-money">投资金额(元)</span>
-       <span class="deal-balance">收益状态</span>
-       </dt>
-       	<dd>
-	       <div class="deal-time">2017-02-01 12:12:33</div>
-	       <div class="deal-name">23.89</div>
-	       <div class="deal-type" style="width:120px">季度宝</div>
-	       <div class="deal-money">1000.0</div>
-	       <div class="deal-balance">收益已返</div>
-       	</dd>
-       	<dd>
-	       <div class="deal-time">2016-10-12 15:19:53</div>
-	       <div class="deal-name">120.34</div>
-	       <div class="deal-type" style="width:120px">新手宝</div>
-	       <div class="deal-money">10000.0</div>
-	       <div class="deal-balance">收益未返</div>
-       	</dd>
-      	&nbsp;&nbsp;
-		<div class="touzi_fenye" style="width:100%;text-align:center;">
-		共21条3页　当前为第2页
-				<a id="linkHomePage" href="${pageContext.request.contextPath}/loan/myIncome">首页</a>
-				<a id="linkPreviousPage" href="${pageContext.request.contextPath}/loan/myIncome?currentPage=${currentPage-1}">上一页</a>
-				<a id="linkNextPage" href="${pageContext.request.contextPath}/loan/myIncome?currentPage=${currentPage+1}">下一页 </a>
-				<a id="linkLastPage" href="${pageContext.request.contextPath}/loan/myIncome?currentPage=${totalPage}">尾页</a>
-		</div>
-      </dl>
+		 <dl>
+			 <dt>
+				 <span class="deal-time">收益日期</span>
+				 <span class="deal-name">收益金额</span>
+				 <span class="deal-type" style="width:120px">投资产品</span>
+				 <span class="deal-money">投资金额(元)</span>
+				 <span class="deal-balance">收益状态</span>
+			 </dt>
+			 <c:forEach items="${incomeRecordList}" var="incomeRecord">
+				 <dd>
+					 <div class="deal-time"><fmt:formatDate value="${incomeRecord.incomeDate }" pattern="yyyy-MM-dd HH:mm:ss"/></div>
+					 <div class="deal-name">${incomeRecord.incomeMoney }</div>
+					 <div class="deal-type" style="width:120px">${incomeRecord.loanInfo.productName}</div>
+					 <div class="deal-money">${incomeRecord.bidMoney }</div>
+					 <div class="deal-balance">
+						 <c:choose>
+							 <c:when test="${incomeRecord.incomeStatus eq 0}">未返还</c:when>
+							 <c:otherwise>已返还</c:otherwise>
+						 </c:choose>
+					 </div>
+				 </dd>
+
+			 </c:forEach>
+			 &nbsp;&nbsp;
+			 <div class="touzi_fenye" style="width:100%;text-align:center;">
+				 共${totalRows}条${totalPage }页　当前为第${currentPage}页
+				 <c:choose>
+					 <c:when test="${currentPage eq 1}">
+						 首页
+						 上一页
+					 </c:when>
+					 <c:otherwise>
+						 <a id="linkHomePage" href="${pageContext.request.contextPath}/loan/myIncome">首页</a>
+						 <a id="linkPreviousPage" href="${pageContext.request.contextPath}/loan/myIncome?currentPage=${currentPage-1}">上一页</a>
+					 </c:otherwise>
+				 </c:choose>
+
+				 <c:choose>
+					 <c:when test="${currentPage eq totalPage}">
+						 下一页
+						 尾页
+					 </c:when>
+					 <c:otherwise>
+						 <a id="linkNextPage" href="${pageContext.request.contextPath}/loan/myIncome?currentPage=${currentPage+1}">下一页 </a>
+						 <a id="linkLastPage" href="${pageContext.request.contextPath}/loan/myIncome?currentPage=${totalPage}">尾页</a>
+					 </c:otherwise>
+				 </c:choose>
+			 </div>
+		 </dl>
      </div>
     </div>
    </div>
-  </div>      
+  </div>
  </div>
 </div>
-<!--页中end-->   
+<!--页中end-->
 <!--页脚start-->
 <jsp:include page="commons/footer.jsp"/>
 <!--页脚end-->

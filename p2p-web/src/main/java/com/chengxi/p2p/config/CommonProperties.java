@@ -1,5 +1,6 @@
 package com.chengxi.p2p.config;
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Configuration
 @PropertySource(value = {"common.properties"})
+@Data
 public class CommonProperties {
 
     /**
@@ -23,19 +25,23 @@ public class CommonProperties {
     @Value("${realName_url}")
     private String realNameUrl;
 
-    public String getRealNameAppkey() {
-        return realNameAppkey;
-    }
+    /**
+     * 调用支付宝支付地址
+     */
+    @Value("${alipay_url}")
+    private String alipayUrl;
 
-    public void setRealNameAppkey(String realNameAppkey) {
-        this.realNameAppkey = realNameAppkey;
-    }
+    /**
+     * 查询支付订单
+     */
+    @Value("${query_order}")
+    private String queryOrder;
 
-    public String getRealNameUrl() {
-        return realNameUrl;
-    }
+    /**
+     * 调用微信支付生成二维码
+     */
+    @Value("${wxpay_url}")
+    private String wxpayUrl;
 
-    public void setRealNameUrl(String realNameUrl) {
-        this.realNameUrl = realNameUrl;
-    }
+
 }

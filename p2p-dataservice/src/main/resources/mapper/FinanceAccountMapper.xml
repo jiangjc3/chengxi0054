@@ -46,6 +46,16 @@
         </trim>
     </insert>
 
+    <!--收益返还：更新帐户可用余额-->
+    <update id="updateFinanceAccountByIncomeBack">
+        UPDATE
+          u_finance_account
+        SET
+          available_money = #{bidMoney} + #{incomeMoney} + available_money
+        WHERE
+          uid = #{uid}
+    </update>
+
     <!--用户投资：更新帐户可用余额-->
     <update id="updateFinanceAccountByBid">
         update
@@ -54,5 +64,15 @@
           available_money = available_money - #{bidMoney}
         where
           uid = #{uid} and (available_money - #{bidMoney}) >= 0
+    </update>
+
+    <!--用户充值：更新帐户可用余额-->
+    <update id="updateFinanceAccountByRecharge">
+        UPDATE
+          u_finance_account
+        SET
+          available_money = available_money + #{rechargeMoney}
+        WHERE
+          uid = #{uid}
     </update>
 </mapper>

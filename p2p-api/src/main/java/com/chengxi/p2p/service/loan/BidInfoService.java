@@ -2,6 +2,7 @@ package com.chengxi.p2p.service.loan;
 
 import com.chengxi.p2p.model.loan.BidInfo;
 import com.chengxi.p2p.model.vo.BidUserTop;
+import com.chengxi.p2p.model.vo.PaginatinoVO;
 import com.chengxi.p2p.model.vo.ResultObject;
 
 import java.util.List;
@@ -19,4 +20,8 @@ public interface BidInfoService {
     List<BidUserTop> queryBidUserTop();
 
     ResultObject invest(Map<String, Object> paramMap);
+
+    PaginatinoVO<BidInfo> queryBidInfoByPage(Map<String, Object> paramMap);
+
+    List<BidInfo> queryBidInfoTopByUid(Map<String, Object> paramMap);
 }
