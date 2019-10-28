@@ -43,5 +43,12 @@ public class CommonProperties {
     @Value("${wxpay_url}")
     private String wxpayUrl;
 
+    /**
+     * 微信支付结果查询
+     */
+    @Value("${wxpay_payback}")
+    private String wxpayBack;
+
+
 
 }

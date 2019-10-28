@@ -16,6 +16,7 @@
             src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" language="javascript"
             src="${pageContext.request.contextPath}/js/trafficStatistics.js"></script>
+
 </head>
 
 <body>
@@ -39,7 +40,7 @@
 
             <div class="right-body">
                 <div class="leftTitle"><span class="on">微信支付</span></div>
-
+                <span hidden="true" id="out_trade_no">${rechargeNo}</span>
                 <div class="unrecognized" style="display:block;" id="unrecognized1">
                     <h3>充值订单号：${rechargeNo} &nbsp;&nbsp; 充值金额：${rechargeMoney} &nbsp;&nbsp;充值时间:${rechargeTime}</h3>
                     <img src="${pageContext.request.contextPath}/loan/generateQRCode?rechargeNo=${rechargeNo}&rechargeMoney=${rechargeMoney}&d=" + new Date().getTime()/>
@@ -54,5 +55,39 @@
 <!--页脚start-->
 <jsp:include page="commons/footer.jsp"/>
 <!--页脚end-->
+
+<script type="text/javascript">
+    // 查询是否支付成功
+    function checkPayResult() {
+        // 获取订单号
+        var out_trade_no = document.getElementById("out_trade_no").innerText;
+        if (out_trade_no == null || out_trade_no == "") {
+            return;
+        }
+        $.ajax({
+            url: "wxPayIsSuccess",
+            data: "out_trade_no=" + out_trade_no,
+            type: "get",
+            success: function (jsonObject) {
+                if (jsonObject.result == "success") {
+                    location.href = "${pageContext.request.contextPath}/loan/myRecharge";
+                }
+            }
+        });
+
+        /*$.get("/loan/wxPayIsSuccess", function(data) {
+//              debugger;
+            console.log(data);
+            if (data) {
+                window.location.href = "/loan/myRecharge";
+            }
+        });*/
+    }
+    $(function() {
+        // 每个3秒调用后台方法，查看订单是否已经支付成功
+        window.setInterval("checkPayResult()", 3000);
+    });
+</script>
 </body>
+
 </html>

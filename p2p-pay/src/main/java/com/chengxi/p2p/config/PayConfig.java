@@ -100,5 +100,8 @@ public class PayConfig {
     @Value("${wxpay_trade_type}")
     private String wxpayTradeType;
 
+    @Value("${wxpay_payback}")
+    private String wxpayBack;
+
 
 }

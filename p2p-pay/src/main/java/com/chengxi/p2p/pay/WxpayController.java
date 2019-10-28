@@ -64,4 +64,30 @@ public class WxpayController {
 
         return responseDataMap;
     }
+
+    @RequestMapping("/api/wxPayBack")
+    public @ResponseBody
+    Object alipayQuery(HttpServletRequest request,
+                       @RequestParam(value = "out_trade_no", required = true) String out_trade_no) throws Exception {
+        Map paraMap = new HashMap();
+        paraMap.put("appid", payConfig.getWxpayAppId());
+        paraMap.put("mch_id", payConfig.getWxpayMchId());
+        paraMap.put("out_trade_no", out_trade_no);
+        paraMap.put("nonce_str", WXPayUtil.generateNonceStr());
+        //生成签名值
+        String signature = WXPayUtil.generateSignature(paraMap, payConfig.getWxpayKey());
+        paraMap.put("sign", signature);
+        //xml格式的请求上传参数
+        String requestDataXml = WXPayUtil.mapToXml(paraMap);
+        logger.info("查询微信支付状态paraMap = {}", requestDataXml);
+        System.out.println(payConfig.getWxpayBack());
+
+        String responseDataXml = HttpClientUtils.doPostByXml(payConfig.getWxpayBack(), requestDataXml);
+        logger.info("查询微信支付状态responseDataXml = {}", responseDataXml);
+        //将响应的xml格式的字符串转换为Map集合
+        Map<String, String> responseDataMap = WXPayUtil.xmlToMap(responseDataXml);
+        System.out.println(JSON.toJSON(responseDataMap));
+
+        return responseDataMap;
+    }
 }

@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -93,7 +94,7 @@ public class RechargeRecordController {
     public String toAlipayRecharge(HttpServletRequest request, Model model,
                                    @RequestParam(value = "rechargeMoney", required = true) Double rechargeMoney) {
 
-        System.out.println("----------toAlipay----------------");
+        logger.info("================toAlipay==================");
 
         //从session中获取用户信息
         User sessionUser = (User) request.getSession().getAttribute(BizConstant.SESSION_USER);
@@ -128,7 +129,7 @@ public class RechargeRecordController {
     @RequestMapping(value = "/loan/toWxpayRecharge")
     public String toWxpayRecharge(HttpServletRequest request, Model model,
                                   @RequestParam(value = "rechargeMoney", required = true) Double rechargeMoney) {
-        System.out.println("--------------toWxpay-------------------");
+        logger.info("================toWxpay==================");
 
         //从session中获取用户信息
         User sessionUser = (User) request.getSession().getAttribute(BizConstant.SESSION_USER);
@@ -163,7 +164,7 @@ public class RechargeRecordController {
                              @RequestParam(value = "out_trade_no", required = true) String out_trade_no,
                              @RequestParam(value = "total_amount", required = true) Double total_amount,
                              @RequestParam(value = "signVerified", required = true) String signVerified) {
-        System.out.println("------------alipayBack--------------");
+        logger.info("================支付宝支付回调查询支付结果==================");
 
         //判断验证结果
         if (StringUtils.equals(BizConstant.SUCCESS, signVerified)) {
@@ -232,7 +233,7 @@ public class RechargeRecordController {
     public void generateQRCode(HttpServletRequest request, HttpServletResponse response,
                                @RequestParam(value = "rechargeNo", required = true) String rechargeNo,
                                @RequestParam(value = "rechargeMoney", required = true) Double rechargeMoney) throws IOException, WriterException, WriterException {
-        logger.info("开始准备调用微信支付接口");
+        logger.info("================开始准备调用微信支付接口==================");
         Map<String, Object> paramMap = new HashMap<String, Object>();
         paramMap.put("body", "微信支付");
         paramMap.put("out_trade_no", rechargeNo);
@@ -276,6 +277,40 @@ public class RechargeRecordController {
         } else {
             response.sendRedirect(request.getContextPath() + "/toRecharge.jsp");
         }
+    }
+
+    @RequestMapping("/loan/wxPayIsSuccess")
+    @ResponseBody
+    public Object wxpayBack(HttpServletRequest request, Model model,
+                            @RequestParam(value = "out_trade_no", required = true) String out_trade_no) {
+        logger.info("================微信支付回调查询支付结果==================");
+        Map paramMap = new HashMap();
+        paramMap.put("out_trade_no", out_trade_no);
+
+        //调用pay统一下单API接口 -> 返回参数，参数中包含code_url
+        String jsonResult = HttpClientUtils.doPost(commonProperties.getWxpayBack(), paramMap);
+        logger.info("调用微信支付订单查询结果： [{}]", jsonResult);
+        //解析json格式的字符串
+        JSONObject jsonObject = JSONObject.parseObject(jsonResult);
+        //获取通信标识
+        String tradeState = jsonObject.getString("trade_state");
+        Map result = new HashMap();
+        if (BizConstant.SUCCESS.equals(tradeState)) {
+            // 支付成功,更改支付状态
+            logger.info("===========支付成功==========");
+            RechargeRecord rechargeRecord = new RechargeRecord();
+            rechargeRecord.setRechargeNo(out_trade_no);
+            //0充值中，1充值成功，2充值失败
+            rechargeRecord.setRechargeStatus("1");
+            rechargeRecordService.modifyRechargeRecordByRechargeNo(rechargeRecord);
+            result.put("result", "success");
+            return result;
+        }
+
+        result.put("result", "notPay");
+        logger.info("============订单待支付============");
+
+        return result;
     }
 
 }
