@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -33,17 +34,19 @@ public class JspWebConfiguration extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(userInterceptor)
                 // addPathPatterns 用于添加拦截规则
-                .addPathPatterns("/**")
+                .addPathPatterns("/loan/**")
                 // excludePathPatterns 用于排除拦截
-                .excludePathPatterns("/")
+                .excludePathPatterns("/loan/loan")
                 // 首页
-                .excludePathPatterns("/index")
+                .excludePathPatterns("/loan/loanInfo")
                 // 生成验证码
-                .excludePathPatterns("/jcaptcha/captcha")
+//                .excludePathPatterns("/jcaptcha/captcha")
                 // 检查验证码
                 .excludePathPatterns("/loan/checkCaptcha")
                 // 检查手机号码
                 .excludePathPatterns("/loan/checkPhone")
+                // 登录
+                .excludePathPatterns("/loan/login")
                 // 用户注册
                 .excludePathPatterns("/loan/register");
         super.addInterceptors(registry);
