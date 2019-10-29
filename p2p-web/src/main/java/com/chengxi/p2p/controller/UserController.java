@@ -11,6 +11,7 @@ import com.chengxi.p2p.model.user.User;
 import com.chengxi.p2p.model.vo.ResultObject;
 import com.chengxi.p2p.service.loan.BidInfoService;
 import com.chengxi.p2p.service.loan.IncomeRecordService;
+import com.chengxi.p2p.service.loan.LoanInfoService;
 import com.chengxi.p2p.service.loan.RechargeRecordService;
 import com.chengxi.p2p.service.user.FinanceAccountService;
 import com.chengxi.p2p.service.user.UserService;
@@ -23,10 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,6 +59,9 @@ public class UserController {
 
     @Reference
     private IncomeRecordService incomeRecordService;
+
+    @Reference
+    private LoanInfoService loanInfoService;
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -309,23 +310,24 @@ public class UserController {
         return mv;
     }
 
-    /*@RequestMapping("loan/myInvest")
-    public ModelAndView myInvest(HttpServletRequest request, ModelMap model) {
-        ModelAndView mv = new ModelAndView("myInvest");
+    @RequestMapping(value="/loan/loadStat")
+    public @ResponseBody
+    Object loadStat() {
+        Map<String,Object> retMap = new ConcurrentHashMap<>();
 
-        return mv;
-    }*/
+        //获取平台历史平均年化收益率
+        Double historyAverageRate = loanInfoService.queryHistoryAverageRate();
+        retMap.put("historyAverageRate", historyAverageRate);
 
-    /*@RequestMapping("loan/myRecharge")
-    public ModelAndView myRecharge(HttpServletRequest request, ModelMap model) {
-        ModelAndView mv = new ModelAndView("myRecharge");
-        return mv;
-    }*/
+        //获取平台注册总人数
+        Long allUserCount = userService.queryAllUserCount();
+        retMap.put("allUserCount", allUserCount);
 
-    /*@RequestMapping("loan/myIncome")
-    public ModelAndView myIncome(HttpServletRequest request, ModelMap model) {
-        ModelAndView mv = new ModelAndView("myIncome");
-        return mv;
-    }*/
+        //获取平台总投资金额
+        Double allBidMoney = bidInfoService.queryAllBidMoney();
+        retMap.put("allBidMoney", allBidMoney);
+
+        return retMap;
+    }
 
 }

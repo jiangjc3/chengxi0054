@@ -39,8 +39,8 @@ public class JspWebConfiguration extends WebMvcConfigurerAdapter {
                 .excludePathPatterns("/loan/loan")
                 // 首页
                 .excludePathPatterns("/loan/loanInfo")
-                // 生成验证码
-//                .excludePathPatterns("/jcaptcha/captcha")
+                // 查询平台关键数据
+                .excludePathPatterns("/loan/loadStat")
                 // 检查验证码
                 .excludePathPatterns("/loan/checkCaptcha")
                 // 检查手机号码
