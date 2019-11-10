@@ -52,7 +52,7 @@ public class BidInfoServiceImpl implements BidInfoService {
             allBidMoney = bidInfoMapper.selectAllBidMoney();
 
             //存放到redis缓存中
-            boundValueOps.set(allBidMoney, 15, TimeUnit.MINUTES);
+            boundValueOps.set(allBidMoney, 15, TimeUnit.SECONDS);
 
         }
 

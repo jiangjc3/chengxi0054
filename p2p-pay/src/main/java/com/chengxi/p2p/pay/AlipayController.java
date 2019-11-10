@@ -121,7 +121,6 @@ public class AlipayController {
             model.addAttribute("signVerified", "FAIL");
         }
         model.addAttribute("pay_p2p_return_url", payConfig.getAlipayP2pReturnUrl());
-        //——请在这里编写您的程序（以上代码仅作参考）——
         return "toP2P";
     }
 

@@ -35,6 +35,7 @@ public class WxpayController {
         //创建一个请求参数Map
         Map<String, String> requestDataMap = new HashMap<>();
         requestDataMap.put("appid", payConfig.getWxpayAppId());
+        // 商户号
         requestDataMap.put("mch_id", payConfig.getWxpayMchId());
         // 随机字符串
         requestDataMap.put("nonce_str", WXPayUtil.generateNonceStr());

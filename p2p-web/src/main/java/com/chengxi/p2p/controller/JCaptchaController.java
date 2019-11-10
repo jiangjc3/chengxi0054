@@ -33,7 +33,7 @@ public class JCaptchaController {
      */
     @RequestMapping(value="/jcaptcha/captcha")
     public void handleCaptchaRequest(HttpServletRequest request, HttpServletResponse response) {
-            //生成6位随机验证码
+            //生成3位随机验证码
             String captcha = this.getRandomCode(3);
         try {
             //创建字节数组输出流

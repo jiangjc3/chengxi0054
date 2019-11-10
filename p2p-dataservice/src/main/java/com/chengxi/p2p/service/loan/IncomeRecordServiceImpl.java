@@ -74,7 +74,7 @@ public class IncomeRecordServiceImpl implements IncomeRecordService {
                 Double incomeMoney = null;
 
                 //判断产品类型
-                if (BizConstant.PRODUCT_TYPE_X == productType) {
+                if (BizConstant.PRODUCT_TYPE_X.equals(productType)) {
                     //新手宝
                     incomeDate = DateUtils.getDateByAddDays(productFullTime, cycle);
                     incomeMoney = bidInfo.getBidMoney() * (rate / 100 / DateUtils.getDaysByYear(Calendar.getInstance().get(Calendar.YEAR))) * cycle;

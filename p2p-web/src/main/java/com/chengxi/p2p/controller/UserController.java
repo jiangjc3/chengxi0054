@@ -252,6 +252,7 @@ public class UserController {
         //发送请求验证用户真实信息 -> 返回json格式的字符串
         String jsonString = HttpClientUtils.doPost(commonProperties.getRealNameUrl(), paramMap);
 //        String jsonString = "{\"code\":\"10000\",\"charge\":false,\"remain\":1305,\"msg\":\"查询成功\",\"result\":{\"error_code\":0,\"reason\":\"成功\",\"result\":{\"realname\":\"乐天磊\",\"idcard\":\"350721197702134399\",\"isok\":true}}}";
+        logger.info("调用京东万象接口返回结果为： {}", jsonString);
 
         //解析json格式字符串，使用fastjson
         //将json格式的字符串转换为JSON对象
@@ -259,6 +260,10 @@ public class UserController {
 
         //获取指定key所对应的value,获取code通信标识
         String code = jsonObject.getString("code");
+
+        // 数据剩余查询次数
+        String remain = jsonObject.getString("remain");
+        logger.info("剩余免费验证的次数为： {}次", remain);
 
         //判断通信是否成功
         if (StringUtils.equals("10000",code)) {
@@ -289,7 +294,6 @@ public class UserController {
                 return retMap;
             }
         } else {
-            //难信失败
             retMap.put(BizConstant.ERROR_MESSAGE,"通信失败，请稍后重试...");
             return retMap;
         }

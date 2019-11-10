@@ -54,7 +54,12 @@ function checkData() {
 		$(".input_text").addClass("input-red");
 		$("#div1_1").show();
 		return false;
-	} else {
+	} else if (parseFloat(rechargeMoney) <= 0) {
+        $("#p1_1").html("充值金额必须大于0");
+        $(".input_text").addClass("input-red");
+        $("#div1_1").show();
+        return false;
+    } else {
 		$(".input_text").removeClass("input-red");
 		$("#div1_1").hide();
 		return true;
