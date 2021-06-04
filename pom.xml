@@ -35,7 +35,7 @@
         <top-version>1.0.0</top-version>
         <spring-data-redis-version>1.8.4.RELEASE</spring-data-redis-version>
         <jedis-versino>2.9.0</jedis-versino>
-        <httpclient-version>4.5.2</httpclient-version>
+        <httpclient-version>4.5.13</httpclient-version>
     </properties>
 
     <dependencyManagement>
